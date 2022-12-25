@@ -1,36 +1,33 @@
 package cli
 
 import (
-	"log"
-
 	"github.com/spf13/cobra"
+
+	"github.com/kitanoyoru/kita-ci/pkg/config"
+	"github.com/kitanoyoru/kita-ci/pkg/log"
 )
 
 var (
-	port int
-
+	port         int
 	rabbitMQAddr string
-
-	db         string
-	dbUser     string
-	dbPassword string
-	dbAddr     string
-
+	db           string
+	dbUser       string
+	dbPassword   string
+	dbAddr       string
 	imageBuilder string
-
-	logLevel string
+	logLevel     string
 )
 
 var rootCmd = &cobra.Command{
-	User:  "kita-ci",
+	Use:   "kita-ci",
 	Short: "Kita CI worker microservice",
 }
 
 var startCmd = &cobra.Command{
-	User:  "start",
+	Use:   "start",
 	Short: "Start kita CI worker",
 	Run: func(cmd *cobra.Command, args []string) {
-		config := config.NewWorkerConfig{
+		config := config.WorkerConfig{
 			Port:         port,
 			RabbitMQAddr: rabbitMQAddr,
 			DB:           db,
@@ -40,9 +37,9 @@ var startCmd = &cobra.Command{
 			ImageBuilder: imageBuilder,
 		}
 
-		logger = log.NewLogger(logLevel)
+		logger := log.NewLogger(logLevel)
 
-		worker := worker.NewWorker(config, logLevel)
+		worker := worker.NewWorker(config, logger)
 
 		worker.Run()
 	},
@@ -50,7 +47,7 @@ var startCmd = &cobra.Command{
 
 func Run() {
 	if err := rootCmd.Execute(); err != nil {
-		log.Fatal(err)
+		panic(err) // TODO: Make it more cleaner
 	}
 }
 
