@@ -1,0 +1,9 @@
+kita-ci:
+  port: 0
+  rabbitmq: ""
+  db: ""
+  dbUser: ""
+  dbPassword: ""
+  dbAddr: ""
+  imageBuilder: ""
+  logLevel: ""
