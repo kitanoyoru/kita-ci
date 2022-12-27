@@ -16,3 +16,7 @@ type PostresConfig struct {
 	DBPassword string
 	DBAddr     string
 }
+
+type GrpcAPIServerConfig struct {
+	Port int
+}

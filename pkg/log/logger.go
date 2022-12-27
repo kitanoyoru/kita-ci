@@ -41,12 +41,12 @@ func (l *Logger) Info(msg string) {
 	l.logger.Info(msg)
 }
 
-func (l *Logger) Error(msg string) {
+func (l *Logger) Error(msg string, err error) {
 	defer l.logger.Sync()
-	l.logger.Error(msg)
+	l.logger.Error(msg, zap.Error(err))
 }
 
-func (l *Logger) Fatal(msg string) {
+func (l *Logger) Fatal(msg string, err error) {
 	defer l.logger.Sync()
-	l.logger.Fatal(msg)
+	l.logger.Fatal(msg, zap.Error(err))
 }
