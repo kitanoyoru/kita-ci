@@ -3,8 +3,8 @@ package cli
 import (
 	"github.com/spf13/cobra"
 
+	"github.com/kitanoyoru/kita-ci/internal/worker"
 	"github.com/kitanoyoru/kita-ci/pkg/config"
-  "github.com/kitanoyoru/kita-ci/internal/worker"
 	"github.com/kitanoyoru/kita-ci/pkg/log"
 )
 

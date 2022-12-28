@@ -7,36 +7,34 @@ import (
 	"github.com/kitanoyoru/kita-ci/pkg/log"
 )
 
-
-
 type CIWorker struct {
-  config *config.WorkerConfig
-  jobsQueue queue.Queue
-  dbClient *db.PostgresClient // TODO: Change to interface
-  logger log.ILogger
+	config    *config.WorkerConfig
+	jobsQueue queue.Queue
+	dbClient  *db.PostgresClient // TODO: Change to interface
+	logger    log.ILogger
 }
 
 func NewCIWorker(cfg *config.WorkerConfig, logger log.ILogger) *CIWorker {
-  dbConfig := config.PostgresConfig {
-    DB: cfg.DB,
-    DBUser: cfg.DBUser,
-    DBPassword: cfg.DBPassword,
-    DBAddr: cfg.DBAddr,
-  }
-  dbClient := db.NewPostgresClient(dbConfig)
+	dbConfig := config.PostgresConfig{
+		DB:         cfg.DB,
+		DBUser:     cfg.DBUser,
+		DBPassword: cfg.DBPassword,
+		DBAddr:     cfg.DBAddr,
+	}
+	dbClient := db.NewPostgresClient(dbConfig)
 
-  ciJobsQueue := queue.NewRMQQueue(cfg.RabbitMQAddr)
+	ciJobsQueue := queue.NewRMQQueue(cfg.RabbitMQAddr)
 
-  worker := &CIWorker {
-    config: cfg,
-    jobsQueue: ciJobsQueue,
-    dbClient: dbClient,
-    logger: logger,
-  }
+	worker := &CIWorker{
+		config:    cfg,
+		jobsQueue: ciJobsQueue,
+		dbClient:  dbClient,
+		logger:    logger,
+	}
 
-  return worker
+	return worker
 }
 
 func (w *CIWorker) Run() {
-  w.startConsuming()
+	w.startConsuming()
 }
