@@ -36,5 +36,5 @@ func NewCIWorker(cfg *config.WorkerConfig, logger log.ILogger) *CIWorker {
 }
 
 func (w *CIWorker) Run() {
-	w.startConsuming()
+	w.StartConsuming()
 }
