@@ -7,7 +7,7 @@ type DatabaseClient interface {
 
 	InsertBuild(*structs.Build) error
 	AllBuilds(repoID int64, branch string) ([]*structs.Build, error)
-	CountBuilds(repoID, branch string) (int, error)
+	CountBuilds(repoID int64, branch string) (int, error)
 	FindBuildByID(buildID int64) (*structs.Build, error)
 
 	Disconnect() error

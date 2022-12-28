@@ -1,7 +1,7 @@
 package worker
 
 import (
-	db "github.com/kitanoyoru/kita-ci/internal/db/postgres"
+	"github.com/kitanoyoru/kita-ci/internal/db"
 	"github.com/kitanoyoru/kita-ci/internal/queue"
 	"github.com/kitanoyoru/kita-ci/pkg/config"
 	"github.com/kitanoyoru/kita-ci/pkg/log"

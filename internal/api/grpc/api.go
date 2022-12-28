@@ -8,7 +8,7 @@ import (
 
 	grpcTypes "github.com/kitanoyoru/kita-proto/go"
 
-	db "github.com/kitanoyoru/kita-ci/internal/db/postgres"
+	"github.com/kitanoyoru/kita-ci/internal/db"
 	"github.com/kitanoyoru/kita-ci/pkg/config"
 	"github.com/kitanoyoru/kita-ci/pkg/log"
 )
@@ -17,10 +17,10 @@ import (
 type GrpcAPIServer struct {
 	config   config.GrpcAPIServerConfig
 	log      log.Logger
-	dbClient db.PostgresClient
+	dbClient db.DatabaseClient
 }
 
-func NewGrpcAPIServer(cfg config.GrpcAPIServerConfig, logger log.Logger, dbClient db.PostgresClient) *GrpcAPIServer {
+func NewGrpcAPIServer(cfg config.GrpcAPIServerConfig, logger log.Logger, dbClient db.DatabaseClient) *GrpcAPIServer {
 	return &GrpcAPIServer{
 		config:   cfg,
 		log:      logger,
