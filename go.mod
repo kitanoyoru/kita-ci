@@ -9,7 +9,7 @@ require (
 	github.com/hashicorp/hcl v1.0.0 // indirect
 	github.com/inconshreveable/mousetrap v1.1.0 // indirect
 	github.com/jinzhu/inflection v1.0.0 // indirect
-	github.com/kitanoyoru/kita-proto v0.0.0-20221224100012-f10e94441b22 // indirect
+	github.com/kitanoyoru/kita-proto v0.0.0-20221228094041-9b74b1ed2c5f // indirect
 	github.com/magiconair/properties v1.8.7 // indirect
 	github.com/mitchellh/mapstructure v1.5.0 // indirect
 	github.com/pelletier/go-toml v1.9.5 // indirect

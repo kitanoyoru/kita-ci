@@ -29,3 +29,7 @@ func (w *CIWorker) StartConsuming() {
 	w.logger.Info("CI Worker started")
 	<-execFlag
 }
+
+func (w *CIWorker) executeCIJob(job grpcTypes.CIJob) {
+  
+}

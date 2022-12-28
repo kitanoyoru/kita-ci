@@ -136,6 +136,8 @@ github.com/jstemmer/go-junit-report v0.9.1/go.mod h1:Brl9GWCQeLvo8nXZwPNNblvFj/X
 github.com/kisielk/gotool v1.0.0/go.mod h1:XhKaO+MFFWcvkIS/tQcRk01m1F5IRFswLeQ+oQHNcck=
 github.com/kitanoyoru/kita-proto v0.0.0-20221224100012-f10e94441b22 h1:1+nQ76Sc8qokpkowDT2Bcs65bCb7VgJJrcJBmeBa3RM=
 github.com/kitanoyoru/kita-proto v0.0.0-20221224100012-f10e94441b22/go.mod h1:lpH9qrIlpQUS+Tc1eIj5HUjkipRdWiyvuOOyIrZ9m4Y=
+github.com/kitanoyoru/kita-proto v0.0.0-20221228094041-9b74b1ed2c5f h1:E9YNHuNc0zpzUWDxTt2PPEqvHdwqR1v0D5cZSnsXuLk=
+github.com/kitanoyoru/kita-proto v0.0.0-20221228094041-9b74b1ed2c5f/go.mod h1:lpH9qrIlpQUS+Tc1eIj5HUjkipRdWiyvuOOyIrZ9m4Y=
 github.com/kr/fs v0.1.0/go.mod h1:FFnZGqtBN9Gxj7eW1uZ42v5BccTP0vu6NEaFoC2HwRg=
 github.com/kr/pretty v0.1.0/go.mod h1:dAy3ld7l9f0ibDNOQOHHMYYIIbhfbHSm3C4ZsoJORNo=
 github.com/kr/pty v1.1.1/go.mod h1:pFQYn66WHrOpPYNljwOMqo10TkYh1fy3cYio2l3bCsQ=
