@@ -4,6 +4,7 @@ import (
 	"github.com/spf13/cobra"
 
 	"github.com/kitanoyoru/kita-ci/pkg/config"
+  "github.com/kitanoyoru/kita-ci/internal/worker"
 	"github.com/kitanoyoru/kita-ci/pkg/log"
 )
 
@@ -27,7 +28,7 @@ var startCmd = &cobra.Command{
 	Use:   "start",
 	Short: "Start kita CI worker",
 	Run: func(cmd *cobra.Command, args []string) {
-		config := config.WorkerConfig{
+		config := &config.WorkerConfig{
 			Port:         port,
 			RabbitMQAddr: rabbitMQAddr,
 			DB:           db,
@@ -39,7 +40,7 @@ var startCmd = &cobra.Command{
 
 		logger := log.NewLogger(logLevel)
 
-		worker := worker.NewWorker(config, logger)
+		worker := worker.NewCIWorker(config, logger)
 
 		worker.Run()
 	},

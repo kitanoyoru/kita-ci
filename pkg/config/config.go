@@ -10,7 +10,7 @@ type WorkerConfig struct {
 	ImageBuilder string
 }
 
-type PostresConfig struct {
+type PostgresConfig struct {
 	DB         string
 	DBUser     string
 	DBPassword string

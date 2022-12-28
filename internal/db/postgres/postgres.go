@@ -16,7 +16,7 @@ type PostgresClient struct {
 	pg *pg.DB
 }
 
-func NewPostgresClient(config config.PostresConfig) *PostgresClient {
+func NewPostgresClient(config config.PostgresConfig) *PostgresClient {
 	return &PostgresClient{
 		pg: pg.Connect(&pg.Options{
 			Database: config.DB,
