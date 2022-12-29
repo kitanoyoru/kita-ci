@@ -1,14 +1,12 @@
 package worker
 
 import (
-	"fmt"
-	"strings"
-
 	"github.com/golang/protobuf/proto"
 
 	grpcTypes "github.com/kitanoyoru/kita-proto/go"
 
 	"github.com/kitanoyoru/kita-ci/pkg/structs"
+	"github.com/kitanoyoru/kita-ci/pkg/utils"
 )
 
 func (w *CIWorker) StartConsuming() {
@@ -49,19 +47,18 @@ func (w *CIWorker) executeCIJob(job grpcTypes.CIJob) {
 }
 
 func (w *CIWorker) createDockerBuilderPayload(job grpcTypes.CIJob) structs.CIBuilderPayload {
-	payload := structs.CIBuilderPayload{}
-
-	// REFACTOR: process string logic move to utils
-	payload.RepoName = strings.TrimSuffix(strings.TrimPrefix(job.RepoURL, "https://github.com/"), ".git")
-	payload.Username = strings.Split(strings.TrimPrefix(job.RepoURL, "https://github.com/"), "/")[0]
-	payload.Branch = job.Branch
-	payload.Tag = fmt.Sprintf("%s:%s-%s", payload.RepoName, payload.Branch, job.HeadSHA[:7])
-
-	repoURL := job.RepoURL
-	if job.AccessToken != "" {
-		repoURL = fmt.Sprintf("https://%s:%s@%s", payload.Username, job.AccessToken, strings.TrimPrefix(job.RepoURL, "https://"))
+	payload := structs.CIBuilderPayload{
+		RepoURL: job.RepoURL,
+		Branch:  job.Branch,
 	}
-	payload.RepoURL = repoURL
+
+	payload.RepoName = utils.GetRepoNameFromGithubURL(job.RepoURL)
+	payload.Username = utils.GetUsernameFromGithubURL(job.RepoURL)
+	payload.Tag = utils.MakeContainerTag(job.RepoName, job.Branch, job.HeadSHA)
+
+	if job.AccessToken != "" {
+		payload.RepoURL = utils.MakeRepoUrlWithAccessToken(job.Username, job.AccessToken, job.RepoURL)
+	}
 
 	return payload
 }
