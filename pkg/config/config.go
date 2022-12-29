@@ -20,3 +20,7 @@ type PostgresConfig struct {
 type GrpcAPIServerConfig struct {
 	Port int
 }
+
+type DockerConfig struct {
+	Image string
+}

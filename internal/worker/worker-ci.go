@@ -31,5 +31,5 @@ func (w *CIWorker) StartConsuming() {
 }
 
 func (w *CIWorker) executeCIJob(job grpcTypes.CIJob) {
-  
+
 }
