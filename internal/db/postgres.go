@@ -32,6 +32,7 @@ func NewPostgresClient(config config.PostgresConfig) *PostgresClient {
 func (p *PostgresClient) CreateSchema() error {
 	models := []interface{}{
 		(*structs.Build)(nil),
+		(*structs.Artifact)(nil),
 	}
 
 	for _, model := range models {
@@ -47,8 +48,8 @@ func (p *PostgresClient) CreateSchema() error {
 	return nil
 }
 
-func (p *PostgresClient) InsertBuild(b *structs.Build) error {
-	return p.pg.Insert(b)
+func (p *PostgresClient) InsertBuild(build *structs.Build) error {
+	return p.pg.Insert(build)
 }
 
 func (p *PostgresClient) AllBuilds(repoID int64, branch string) ([]*structs.Build, error) {
@@ -59,7 +60,7 @@ func (p *PostgresClient) AllBuilds(repoID int64, branch string) ([]*structs.Buil
 	return builds, err
 }
 
-func (p *PostgresClient) CountBuilds(repoID int64, branch string) (int, error) {
+func (p *PostgresClient) CountBuildsInRepoWithBranch(repoID int64, branch string) (int, error) {
 	count, err := p.pg.Model(&structs.Build{}).Where("github_repo_id = ?", repoID).Where("branch = ?", branch).Count()
 
 	return count, err
@@ -80,6 +81,55 @@ func (p *PostgresClient) FindBuildByID(buildID int64) (*structs.Build, error) {
 	}
 
 	return build, nil
+}
+
+func (p *PostgresClient) InsertArtifact(artifact *structs.Artifact) error {
+	return p.pg.Insert(artifact)
+}
+
+func (p *PostgresClient) AllArtifacts(repoID int64, branch string) ([]*structs.Artifact, error) {
+	var builds []int
+
+	err := p.pg.Model((*structs.Build)(nil)).Where("github_repo_id = ?", repoID).Where("branch = ?", branch).ColumnExpr("array_agg(id)").Select(pg.Array(&builds))
+	if err != nil {
+		return nil, err
+	}
+
+	var artifacts []*structs.Artifact
+
+	err = p.pg.Model(&artifacts).Where("build_id in (?)", pg.In(builds)).Select()
+	if err != nil {
+		return nil, err
+	}
+
+	return artifacts, nil
+}
+
+func (p *PostgresClient) FindArtifactByBuildID(buildID int64) (*structs.Artifact, error) {
+	artifact := &structs.Artifact{}
+
+	err := p.pg.Model(&artifact).Where("build_id = ?", buildID).Select()
+	if err != nil {
+		return nil, err
+	}
+
+	return artifact, nil
+}
+
+func (p *PostgresClient) FindArtifactByID(id int64) (*structs.Artifact, error) {
+	artifact := &structs.Artifact{
+		ID: id,
+	}
+
+	err := p.pg.Select(artifact)
+	if err != nil {
+		if err == pg.ErrNoRows {
+			return nil, nil
+		}
+		return nil, err
+	}
+
+	return artifact, nil
 }
 
 func (p *PostgresClient) Disconnect() error {

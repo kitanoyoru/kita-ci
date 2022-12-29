@@ -11,6 +11,12 @@ type Build struct {
 	Stdout        string    `json:"stdout"`
 }
 
+type Artifact struct {
+	ID      int64  `json:"artifactID"`
+	BuildID int64  `json:"buildID"`
+	Name    string `json:"name"`
+}
+
 type CIBuilderPayload struct {
 	RepoName string `json:"repoName"`
 	RepoURL  string `json:"repoUrl"`

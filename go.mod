@@ -6,6 +6,7 @@ require (
 	github.com/docker/docker v20.10.22+incompatible
 	github.com/go-pg/pg v8.0.7+incompatible
 	github.com/golang/protobuf v1.5.2
+	github.com/kitanoyoru/kita-proto v0.0.0-20221229113508-46746f44d4a0
 	github.com/rabbitmq/amqp091-go v1.5.0
 	github.com/spf13/cobra v1.6.1
 	github.com/spf13/viper v1.14.0
@@ -23,7 +24,6 @@ require (
 	github.com/hashicorp/hcl v1.0.0 // indirect
 	github.com/inconshreveable/mousetrap v1.1.0 // indirect
 	github.com/jinzhu/inflection v1.0.0 // indirect
-	github.com/kitanoyoru/kita-proto v0.0.0-20221229113508-46746f44d4a0 // indirect
 	github.com/magiconair/properties v1.8.7 // indirect
 	github.com/mitchellh/mapstructure v1.5.0 // indirect
 	github.com/moby/term v0.0.0-20221205130635-1aeaba878587 // indirect
