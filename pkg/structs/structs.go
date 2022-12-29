@@ -10,3 +10,11 @@ type Build struct {
 	CreatedAt     time.Time `json:"createdAt"`
 	Stdout        string    `json:"stdout"`
 }
+
+type CIBuilderPayload struct {
+	RepoName string `json:"repoName"`
+	RepoURL  string `json:"repoUrl"`
+	Username string `json:"username"`
+	Branch   string `json:"branch"`
+	Tag      string `json:"tag"`
+}
