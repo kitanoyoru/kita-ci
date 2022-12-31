@@ -128,6 +128,7 @@ func (w *CIWorker) sendInfoToGithub(username, accessToken, repo, sha string, suc
 	buf := bytes.NewBuffer(rawBody)
 
 	// TODO: Create Requests pkg
+  // - gentelman lib: https://github.com/h2non/gentleman
 	req, err := http.NewRequest("POST", url, buf)
 	if err != nil {
 		return err

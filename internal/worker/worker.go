@@ -11,7 +11,7 @@ import (
 type CIWorker struct {
 	config       *config.WorkerConfig
 	jobsQueue    queue.Queue
-	dbClient     *db.PostgresClient // TODO: Change to interface
+	dbClient     db.DatabaseClient
 	dockerClient *docker.DockerClient
 	logger       log.ILogger
 }
