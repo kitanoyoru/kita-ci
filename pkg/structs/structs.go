@@ -24,3 +24,9 @@ type CIBuilderPayload struct {
 	Branch   string `json:"branch"`
 	Tag      string `json:"tag"`
 }
+
+type GithubStatusMessage struct {
+	Description string `json:"description"`
+	Context     string `json:"context"`
+	State       string `json:"state"`
+}
